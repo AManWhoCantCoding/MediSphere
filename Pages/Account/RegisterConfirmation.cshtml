@@ -1,0 +1,23 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (Model.DisplayConfirmAccountLink)
+    {
+<p>
+    Email could not be sent. Configure <code>SmtpSettings</code> in <code>appsettings.json</code>, or confirm manually:
+    <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+</p>
+    }
+    else
+    {
+<p>
+    Please check your email (<strong>@Model.Email</strong>) to confirm your account.
+</p>
+    }
+}
+
