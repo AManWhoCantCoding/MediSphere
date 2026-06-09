@@ -1,0 +1,68 @@
+@using MediSphere.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<UserModel> SignInManager
+
+<nav class="ms-sidebar-nav">
+    <a class="ms-nav-link" data-page href="/Home/Dashboard">
+        <i class="bi bi-grid-1x2"></i>
+        Dashboard
+    </a>
+
+    <a class="ms-nav-link" data-page href="/Patient">
+        <i class="bi bi-person"></i>
+        Patients
+    </a>
+    <ul class="ms-nav-sub">
+        <li>
+            <a class="ms-nav-link" data-page href="/Patient/AddPatient">
+                <i class="bi bi-person-plus"></i>
+                Add A Patient
+            </a>
+        </li>
+    </ul>
+
+    <a class="ms-nav-link" data-page href="/Appointments">
+        <i class="bi bi-calendar-event"></i>
+        Appointments
+    </a>
+
+    <a class="ms-nav-link" data-page href="/Prescriptions">
+        <i class="bi bi-capsule"></i>
+        Prescriptions
+    </a>
+    <ul class="ms-nav-sub">
+        <li>
+            <a class="ms-nav-link" data-page href="/Prescriptions/AddPrescription">
+                <i class="bi bi-plus-circle"></i>
+                Add Prescription
+            </a>
+        </li>
+    </ul>
+
+    <a class="ms-nav-link" data-page href="/Reports">
+        <i class="bi bi-file-earmark-medical"></i>
+        Reports
+    </a>
+    <ul class="ms-nav-sub">
+        <li>
+            <a class="ms-nav-link" data-page href="/Reports/ReportTypes">
+                <i class="bi bi-tags"></i>
+                Report Types
+            </a>
+        </li>
+        <li>
+            <a class="ms-nav-link" data-page href="/Reports/ReportGenerator">
+                <i class="bi bi-file-earmark-plus"></i>
+                Generate A Report
+            </a>
+        </li>
+    </ul>
+
+    @if (User.IsInRole("Administrator"))
+    {
+        <a class="ms-nav-link" data-page href="/Administrator/Settings">
+            <i class="bi bi-gear"></i>
+            Administrator Settings
+        </a>
+    }
+</nav>

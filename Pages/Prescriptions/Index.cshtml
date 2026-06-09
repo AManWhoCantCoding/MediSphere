@@ -1,0 +1,41 @@
+@page
+@model MediSphere.Pages.Prescriptions.IndexModel
+@{
+    ViewData["Title"] = "Prescriptions";
+    Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="ms-toolbar">
+    <div class="ms-page-header mb-0">
+        <h2>Prescriptions</h2>
+        <p>Manage medication prescriptions for patients.</p>
+    </div>
+    <a asp-page="/Prescriptions/AddPrescription" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i> Add Prescription
+    </a>
+</div>
+
+<div class="ms-card">
+    <div class="ms-table-wrap">
+        <table class="table ms-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Medication</th>
+                    <th>Dosage</th>
+                    <th>Payment Needed</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="prescriptions-table-body">
+                <tr><td colspan="7" class="text-center text-muted py-4">Loading prescriptions via API...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/prescriptions.js" asp-append-version="true"></script>
+}

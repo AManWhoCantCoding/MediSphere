@@ -1,0 +1,20 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.contact-number {
+  white-space: nowrap;
+}
+
+.ms-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  z-index: 1035;
+}
+
+.ms-overlay.show {
+  display: block;
+}
