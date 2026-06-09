@@ -96,6 +96,7 @@ The interface was rebuilt from scratch (replacing the Bootswatch *Morph* neumorp
 - Status dropdowns use **1-based** sequential numbering (e.g. `1 - Created`, `1 - Scheduled`) instead of 100-based values.
 - Removed **(API)** labels from modal titles and submit buttons (the UI still calls the REST API via `api-client.js`).
 - Fixed appointment **date/time picker** controls: Bootstrap 5 compatibility for increment/decrement buttons, correct script load order, and modal z-index styling.
+- Fixed appointment **date/time picker** collapse bug: Applied DOM capture phase trick to bypass Bootstrap 5 collapse conflicts with Eonasdan datetimepicker.
 
 ### Report module fixes (Jun 2026)
 

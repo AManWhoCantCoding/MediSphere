@@ -3,10 +3,10 @@
           He thong Quan ly Benh vien (Hospital Management System)
           (Truoc day: DocDocGo — da doi ten va thiet ke lai giao dien)
 ================================================================================
-Ngay cap nhat: 09/06/2026 (sua module Reports + Report Type)
+Ngay cap nhat: 10/06/2026 (sua loi datetimepicker collapse)
 
 ================================================================================
-PHAN 0: CAP NHAT GAN DAY (09/06/2026)
+PHAN 0: CAP NHAT GAN DAY (10/06/2026)
 ================================================================================
 
 SUA MODULE REPORTS VA REPORT TYPE (09/06/2026)
@@ -33,7 +33,8 @@ CAP NHAT GIAO DIEN VA TRANG THAI (09/06/2026)
 - Sua loi datetime picker trong tab Appointments:
   + Bootstrap 5 khong con Glyphicons — nut tang/giam gio khong hien thi.
   + Thu tu load script sai (datetimepicker truoc bootstrap.bundle).
-  + Sua: load bootstrap truoc, dung Bootstrap Icons, widgetParent: 'body', CSS trong siteTheme.css.
+  + Xung dot plugin Collapse cua Bootstrap 5 khien icon cuon lich/dong ho khong the chuyen tab.
+  + Sua: load bootstrap truoc, dung Bootstrap Icons, widgetParent: 'body', CSS trong siteTheme.css. Su dung ky thuat DOM Capture Phase trong bs5-collapse-shim.js de vo hieu hoa tam thoi $.fn.collapse, ep thu vien dung co che fallback.
 - Huong dan them/thay logo: xem muc "Logo Images" trong README.md va PHAN 3C ben duoi.
 
 SUA LOI TAB DANG KY TREN TRANG AUTH
