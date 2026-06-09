@@ -13,7 +13,7 @@ using Serilog;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.File("logs/docdocgo-.log", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("logs/medisphere-.log", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 try

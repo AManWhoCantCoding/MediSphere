@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database-Copy\**" />
     <Compile Remove="MediSphere.Tests\**" />
+    <Content Remove="Database-Copy\**" />
     <Content Remove="MediSphere.Tests\**" />
+    <EmbeddedResource Remove="Database-Copy\**" />
     <EmbeddedResource Remove="MediSphere.Tests\**" />
+    <None Remove="Database-Copy\**" />
     <None Remove="MediSphere.Tests\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Database-Copy\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,8 +8,6 @@
 
 MediSphere is a Hospital Management System — a modern web application for hospital administration, patient care workflows, and staff management. Previously developed as **DocDocGo**, the project has been rebranded and fully redesigned with a clean, professional UI.
 
-**Vietnamese project documentation:** [TAI_LIEU_DU_AN_MediSphere.txt](TAI_LIEU_DU_AN_MediSphere.txt)
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -119,23 +117,22 @@ Place branding assets in `wwwroot/resources/`:
 
 | File | Purpose | Format |
 |---|---|---|
-| `logo-two.svg` | Sidebar and public pages | SVG (recommended) or PNG |
+| `logo.png` | Sidebar and public pages | SVG (recommended) or PNG |
 | `main-logo.svg` | Browser tab favicon | SVG or ICO/PNG (32×32) |
-| `hero-placeholder.svg` | Landing page hero (optional) | SVG, JPG, or PNG |
+| `Doctor.png` | Landing page hero (optional) | SVG, JPG, or PNG |
 
 **To replace logos:**
 
 1. Copy your image into `wwwroot/resources/` (keep the same filename, or rename and update references).
-2. **Sidebar:** `Pages/Shared/_DashboardLayout.cshtml` — `src="~/resources/logo-two.svg"`
+2. **Sidebar:** `Pages/Shared/_DashboardLayout.cshtml` — `src="~/resources/logo.png"`
 3. **Favicon:** `_DashboardLayout.cshtml` and `Pages/Shared/_Layout.cshtml` — `href="~/resources/main-logo.svg"`
-4. **Public layout:** `Pages/Shared/_Layout.cshtml` — `logo-two.svg`
+4. **Public layout:** `Pages/Shared/_Layout.cshtml` — `logo.png`
 5. Hard-refresh the browser (Ctrl+F5) after replacing files.
 
 If you use PNG instead of SVG, update the file extension in the `.cshtml` references above.
 
 ## Software Architecture
 
-- **Report:** [docs/SA_REPORT.md](docs/SA_REPORT.md)
 - **Architecture:** 5-layer monolith (Presentation → Business → Services → Persistence → Database) + REST API
 - **Patterns:** Business layer, service layer, repository pattern, DTOs, dual auth (Cookie + JWT)
 - **DevOps:** GitHub Actions CI/CD, Docker, docker-compose
@@ -225,14 +222,7 @@ dotnet build MediSphere.sln
 
 Connect to `(localdb)\MSSQLLocalDB` or your SQL Server instance in SSMS.
 
-Restore `Database-Copy/
-
-.bak` (original backup filename). On restore, set the database name to **MediSphereDB**, or keep **MediSphereDB** and update `HospitalManagementSQLConnection` in `appsettings.json`.
-
-![SSMS Starting Screenshot](Instruction-images/startingConnection.png)
-![SSMS Context Menu Screenshot](Instruction-images/restoreDatabase.png)
-![SSMS Selection Screenshot](Instruction-images/restoreDatabaseSelection.png)
-![SSMS Final Dialog Screenshot](Instruction-images/finalDatabaseRestore.png)
+Restore `Database\MediSphereDB.bak` (original backup filename). On restore, set the database name to **MediSphereDB**, or keep **MediSphereDB** and update `HospitalManagementSQLConnection` in `appsettings.json`.
 
 ### Run Locally
 
@@ -305,10 +295,6 @@ Password: Password123-_
 
 ## SA Requirements Evaluation
 
-Full evaluation (Vietnamese): [docs/SA_EVALUATION.md](docs/SA_EVALUATION.md) — rubric from `SA requirements.docx` at repo root. **Estimated score: ~97/110** (updated 09/06/2026).
-
-Architecture report: [docs/SA_REPORT.md](docs/SA_REPORT.md).
-
 | Category | Status | Notes |
 |---|---|---|
 | **Requirements analysis** (FR/NFR, stakeholders) | Met | FR-01–FR-10 documented; stakeholders and NFRs in SA report |
@@ -324,8 +310,5 @@ Architecture report: [docs/SA_REPORT.md](docs/SA_REPORT.md).
 
 **Gaps / recommendations:** upgrade from .NET 6 (EOL); expand test coverage beyond repositories; consider approval workflow for public staff registration in production.
 
-## License
-
-MediSphere is open-source software licensed under the [MIT License](LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
