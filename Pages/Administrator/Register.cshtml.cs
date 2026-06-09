@@ -80,15 +80,8 @@ namespace MediSphere.Pages.Administrator
                         "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("/Account/RegisterConfirmation", new { email = CredentialModel.Email });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToPage("/Home/Dashboard"); // Redirect to main dashboard
-                    }
+                    TempData["SuccessMessage"] = $"Tài khoản {CredentialModel.Email} đã được tạo thành công.";
+                    return RedirectToPage("/Administrator/Settings");
                 }
 
                 foreach (var error in result.Errors)

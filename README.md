@@ -111,6 +111,14 @@ After pulling these changes, apply migrations:
 dotnet ef database update --project MediSphere.csproj
 ```
 
+### Backend Architecture & DevOps Updates (Jun 2026)
+
+- Restructured the project into a 5-layer architecture (Presentation, Business, Services, Persistence, Database).
+- Added `RequestLoggingMiddleware` for tracking and logging incoming requests.
+- Applied Dependency Injection via `ServiceCollectionExtensions` for cleaner service registration.
+- Added Docker support (`Dockerfile` and `docker-compose.yml`) for the entire application.
+- Set up a CI/CD pipeline using GitHub Actions (automated build/test).
+
 ## Logo Images
 
 Place branding assets in `wwwroot/resources/`:
@@ -181,8 +189,10 @@ Presentation → Business → Services → Persistence → Database
 | **Presentation** | `Pages/`, `Api/`, `Dto/`, `ViewModels/`, `wwwroot/` | Razor UI, REST controllers, DTOs, client JS |
 | **Business** | `Business/` | Validation, business rules, DTO mapping (`*Business`) |
 | **Services** | `Services/` | Application services orchestrating persistence (`*Service`, `EmailSender`, `NotificationService`) |
-| **Persistence** | `Persistence/` | Repository pattern — CRUD over EF Core (`*Repository`) |
+| **Persistence** | `Persistence/` | Repository pattern — CRUD over EF Core (`*Repository`, Interfaces) |
 | **Database** | `Database/`, `Migrations/` | Entities (`Database/Models/`), `ApplicationDBContext`, SQL Server schema |
+| **Infrastructure** | `Middleware/`, `DependencyInjection/` | Request logging middleware, DI registration |
+| **DevOps** | `.github/`, `Dockerfile` | CI/CD pipelines, Docker containerization |
 
 **New services added:**
 - `PatientService`, `AppointmentService`, `PrescriptionService`, `ReportService`, `ReportTypeService`
@@ -194,9 +204,10 @@ DI registration: `DependencyInjection/ServiceCollectionExtensions.cs` → `AddMe
 
 ## Architecture Notes
 
-- API controllers inject `*Business` interfaces (not repositories directly).
-- Report Razor pages use `IReportBusiness`; Dashboard uses `IDashboardBusiness`.
-- Patient/Appointment/Prescription list pages still call the REST API via `api-client.js` (Presentation → API → Business).
+- API controllers inject `*Business` interfaces (not repositories directly). The request flow is: `Controller → Business → Service → Repository`.
+- Razor Pages data access is divided into two approaches:
+  - **Server-side rendering:** Complex pages (Dashboard, Report Generator, Update Report, Export Report) inject `*Business` interfaces directly (e.g. `IDashboardBusiness`, `IReportBusiness`).
+  - **Client-side API calls:** List pages (Patients, Appointments, Prescriptions, Reports) fetch their data asynchronously from the REST API using `wwwroot/js/api-client.js`.
 
 ## Installation
 
