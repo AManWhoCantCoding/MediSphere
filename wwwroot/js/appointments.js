@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    const l10n = window.MediSphereL10n || {};
     let patientsCache = [];
 
     const dateTimePickerOptions = {
@@ -30,7 +31,7 @@ $(document).ready(function () {
             $('#calendar').fullCalendar('refetchEvents');
             $('#add-appointment-form')[0].reset();
         } catch (err) {
-            alert('Failed to add appointment: ' + err.message);
+            alert((l10n.failedAddAppointment || 'Failed to add appointment:') + ' ' + err.message);
         }
     });
 
@@ -42,19 +43,19 @@ $(document).ready(function () {
             $('#appointment-edit').modal('hide');
             $('#calendar').fullCalendar('refetchEvents');
         } catch (err) {
-            alert('Failed to update appointment: ' + err.message);
+            alert((l10n.failedUpdateAppointment || 'Failed to update appointment:') + ' ' + err.message);
         }
     });
 
     $('#delete-appointment-btn').on('click', async function () {
         const id = $('#SelectedAppointmentId').val();
-        if (!confirm('Delete this appointment?')) return;
+        if (!confirm(l10n.confirmDeleteAppointment || 'Delete this appointment?')) return;
         try {
             await MediSphereApi.appointments.delete(id);
             $('#appointment-edit').modal('hide');
             $('#calendar').fullCalendar('refetchEvents');
         } catch (err) {
-            alert('Failed to delete appointment: ' + err.message);
+            alert((l10n.failedDeleteAppointment || 'Failed to delete appointment:') + ' ' + err.message);
         }
     });
 
@@ -64,14 +65,18 @@ $(document).ready(function () {
 });
 
 async function loadPatientsIntoSelects() {
+    const l10n = window.MediSphereL10n || {};
     patientsCache = await MediSphereApi.patients.getAll();
     const options = patientsCache.map(function (p) {
         return '<option value="' + p.patientId + '">' + p.firstName + ' ' + p.lastName + '</option>';
     }).join('');
-    $('#NewAppointment_PatientId, #SelectedAppointment_PatientId').html('<option value="">-- Select Patient --</option>' + options);
+    const selectPatient = l10n.selectPatient || '-- Select Patient --';
+    $('#NewAppointment_PatientId, #SelectedAppointment_PatientId').html('<option value="">' + selectPatient + '</option>' + options);
 }
 
 function initCalendar() {
+    const l10n = window.MediSphereL10n || {};
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev, next, today',
@@ -90,7 +95,7 @@ function initCalendar() {
                 $('#SelectedAppointmentId').val(event.id);
                 $('#appointment-edit').modal('show');
             } catch (err) {
-                alert('Failed to load appointment: ' + err.message);
+                alert((l10n.failedLoadAppointment || 'Failed to load appointment:') + ' ' + err.message);
             }
         },
         dayClick: function () {
@@ -111,7 +116,7 @@ function initCalendar() {
                 callback(events);
             } catch (err) {
                 callback([]);
-                alert('Failed to load appointments: ' + err.message);
+                alert((l10n.failedLoadAppointments || 'Failed to load appointments:') + ' ' + err.message);
             }
         }
     });

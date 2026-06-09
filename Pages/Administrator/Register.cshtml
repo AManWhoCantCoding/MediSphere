@@ -1,9 +1,8 @@
 @page
 @model MediSphere.Pages.Administrator.RegisterModel
 @{
-    ViewData["Title"] = "Register Staff Account";
+    ViewData["Title"] = Localizer["RegisterStaff_Title"].Value;
     Layout = "~/Pages/Shared/_AuthLayout.cshtml";
-
 }
 
 <div class="container border" style="padding: 20px">
@@ -12,47 +11,43 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for="CredentialModel.FirstName" class="form-control" aria-required="true" />
-                <label asp-for="CredentialModel.FirstName" class="form-label"> First name</label>
+                <label asp-for="CredentialModel.FirstName" class="form-label">@Localizer["FirstName"]</label>
                 <span asp-validation-for="CredentialModel.FirstName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="CredentialModel.MiddleName" class="form-control" />
-                <label asp-for="CredentialModel.MiddleName" class="form-label">Middle name</label>
+                <label asp-for="CredentialModel.MiddleName" class="form-label">@Localizer["MiddleName"]</label>
                 <span asp-validation-for="CredentialModel.MiddleName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="CredentialModel.LastName" class="form-control"/>
-                <label asp-for="CredentialModel.LastName" class="form-label">Last name</label>
+                <label asp-for="CredentialModel.LastName" class="form-label">@Localizer["LastName"]</label>
                 <span asp-validation-for="CredentialModel.LastName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <select asp-for="CredentialModel.Gender" class="form-control">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Non-Binary">Non-Binary</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                    <option value="Custom">Custom</option>
+                    <partial name="_GenderOptionsPartial" />
             </select>
-            <label asp-for="CredentialModel.Gender" class="form-label"> Select gender</label>
+            <label asp-for="CredentialModel.Gender" class="form-label">@Localizer["SelectGender"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="CredentialModel.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="CredentialModel.Email" class="form-label"></label>
+                <label asp-for="CredentialModel.Email" class="form-label">@Localizer["EmailAddress"]</label>
                 <span asp-validation-for="CredentialModel.Email" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
             
             <div class="form-floating">
                 <input asp-for="CredentialModel.PhoneNumber" class="form-control" autocomplete="tel" />
-                <label asp-for="CredentialModel.PhoneNumber" class="form-label"> Phone Number</label>
+                <label asp-for="CredentialModel.PhoneNumber" class="form-label">@Localizer["PhoneNumber"]</label>
                 <span asp-validation-for="CredentialModel.PhoneNumber" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
@@ -60,30 +55,28 @@
             <div class="form-floating">
                 <input asp-for="CredentialModel.DateOfBirth" id="dateOfBirth" class="form-control"
                        data-provide="datepicker" data-date-format="mm/dd/yyyy" />
-                <label asp-for="CredentialModel.DateOfBirth" class="form-label">Date of Birth</label>
+                <label asp-for="CredentialModel.DateOfBirth" class="form-label">@Localizer["DateOfBirth"]</label>
                 <span asp-validation-for="CredentialModel.DateOfBirth" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="PWordModel.Password" class="form-control" aria-required="true" />
-                <label asp-for="PWordModel.Password" class="form-label"> Password</label>
+                <label asp-for="PWordModel.Password" class="form-label">@Localizer["Password"]</label>
                 <span asp-validation-for="PWordModel.Password" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 15px;"></div>
             <div class="form-check">
                 <input asp-for="CredentialModel.AcceptedTerms" class="form-check-input" type="checkbox" aria-required="true" />
                 <label asp-for="CredentialModel.AcceptedTerms" class="form-check-label">
-                    I agree to the terms and conditions
+                    @Localizer["AcceptedTerms"]
                 </label>
             </div>
             <div style="margin-bottom: 15px;"></div>
             <div class="form-group d-flex align-items-center">
                 <div class="col-7 offset-2 text-center">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">@Localizer["SignUp"]</button>
                 </div>
-            </div>
-            <div class="form-group">
             </div>
         </form>
     </section>

@@ -1,17 +1,17 @@
 @page
 @model MediSphere.Pages.Prescriptions.IndexModel
 @{
-    ViewData["Title"] = "Prescriptions";
+    ViewData["Title"] = Localizer["Prescriptions_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="ms-toolbar">
     <div class="ms-page-header mb-0">
-        <h2>Prescriptions</h2>
-        <p>Manage medication prescriptions for patients.</p>
+        <h2>@Localizer["Prescriptions_Title"]</h2>
+        <p>@Localizer["Prescriptions_Subtitle"]</p>
     </div>
     <a asp-page="/Prescriptions/AddPrescription" class="btn btn-primary">
-        <i class="bi bi-plus-circle me-1"></i> Add Prescription
+        <i class="bi bi-plus-circle me-1"></i> @Localizer["AddPrescription_Title"]
     </a>
 </div>
 
@@ -21,16 +21,16 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Patient</th>
-                    <th>Medication</th>
-                    <th>Dosage</th>
-                    <th>Payment Needed</th>
-                    <th>Notes</th>
-                    <th>Actions</th>
+                    <th>@Localizer["Patient"]</th>
+                    <th>@Localizer["MedicationName"]</th>
+                    <th>@Localizer["Dosage"]</th>
+                    <th>@Localizer["PaymentNeeded"]</th>
+                    <th>@Localizer["Notes"]</th>
+                    <th>@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody id="prescriptions-table-body">
-                <tr><td colspan="7" class="text-center text-muted py-4">Loading prescriptions via API...</td></tr>
+                <tr><td colspan="7" class="text-center text-muted py-4">@Localizer["LoadingPrescriptions"]</td></tr>
             </tbody>
         </table>
     </div>

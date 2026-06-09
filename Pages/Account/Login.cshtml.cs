@@ -1,10 +1,12 @@
 using MediSphere.Models;
+using MediSphere.Resources;
 using MediSphere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Build.Framework;
+using Microsoft.Extensions.Localization;
 
 namespace MediSphere.Pages.Account
 {
@@ -13,12 +15,16 @@ namespace MediSphere.Pages.Account
     {
         private readonly SignInManager<UserModel> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
-        public LoginModel(SignInManager<UserModel> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<UserModel> signInManager,
+            ILogger<LoginModel> logger,
+            IStringLocalizer<SharedResources> localizer)
         {
             _signInManager = signInManager;
             _logger = logger;
-
+            _localizer = localizer;
         }
 
         [BindProperty, Required]
@@ -54,7 +60,7 @@ namespace MediSphere.Pages.Account
                     return RedirectToPage("./Lockout");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid credentials, Please try again!");
+                ModelState.AddModelError(string.Empty, _localizer["InvalidCredentials"]);
             }
 
             return Page();

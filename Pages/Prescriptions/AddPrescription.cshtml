@@ -1,38 +1,38 @@
 @page
 @model MediSphere.Pages.Prescriptions.AddPrescriptionModel
 @{
-    ViewData["Title"] = "Add Prescription";
+    ViewData["Title"] = Localizer["AddPrescription_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="ms-page-header">
-    <h2>Add Prescription</h2>
-    <p>Create a new prescription for a patient.</p>
+    <h2>@Localizer["AddPrescription_Title"]</h2>
+    <p>@Localizer["AddPrescription_Subtitle"]</p>
 </div>
 
 <div class="ms-card ms-form-card">
     <form id="add-prescription-form">
         <div class="form-floating mb-3">
             <select id="patientId" class="form-control" required></select>
-            <label>Patient</label>
+            <label>@Localizer["Patient"]</label>
         </div>
         <div class="form-floating mb-3">
             <input id="medicationName" class="form-control" required />
-            <label>Medication Name</label>
+            <label>@Localizer["MedicationName"]</label>
         </div>
         <div class="form-floating mb-3">
             <input id="dosage" class="form-control" required />
-            <label>Dosage</label>
+            <label>@Localizer["Dosage"]</label>
         </div>
         <div class="form-check mb-3">
             <input id="paymentNeeded" class="form-check-input" type="checkbox" />
-            <label class="form-check-label">Payment Needed</label>
+            <label class="form-check-label">@Localizer["PaymentNeeded"]</label>
         </div>
         <div class="form-floating mb-4">
             <textarea id="notes" class="form-control"></textarea>
-            <label>Notes</label>
+            <label>@Localizer["Notes"]</label>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Add Prescription</button>
+        <button type="submit" class="btn btn-primary w-100">@Localizer["AddPrescription_Title"]</button>
     </form>
 </div>
 

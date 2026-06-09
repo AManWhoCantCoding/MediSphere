@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  const l10n = window.MediSphereL10n || {};
+
   if ($('#patients-table-body').length) {
     loadPatientsTable();
   }
@@ -19,7 +21,7 @@ $(document).ready(function () {
       await MediSphereApi.patients.create(payload);
       window.location.href = '/Patient/Index';
     } catch (err) {
-      alert('Failed to add patient: ' + err.message);
+      alert((l10n.failedAddPatient || 'Failed to add patient:') + ' ' + err.message);
     }
   });
 
@@ -45,19 +47,23 @@ $(document).ready(function () {
       await MediSphereApi.patients.update(id, payload);
       window.location.href = '/Patient/Index';
     } catch (err) {
-      alert('Failed to update patient: ' + err.message);
+      alert((l10n.failedUpdatePatient || 'Failed to update patient:') + ' ' + err.message);
     }
   });
 });
 
 async function loadPatientsTable() {
+  const l10n = window.MediSphereL10n || {};
+
   try {
     const patients = await MediSphereApi.patients.getAll();
     const tbody = $('#patients-table-body');
     tbody.empty();
 
     patients.forEach(function (p) {
-      const treatment = p.isPrivatePatient ? 'Private Healthcare' : 'NHS Treatment';
+      const treatment = p.isPrivatePatient
+        ? (l10n.privateHealthcare || 'Private Healthcare')
+        : (l10n.nhsTreatment || 'NHS Treatment');
       const dob = p.dateOfBirth ? p.dateOfBirth.split('T')[0] : '';
       tbody.append(
         '<tr>' +
@@ -83,11 +89,13 @@ async function loadPatientsTable() {
       });
     }
   } catch (err) {
-    alert('Failed to load patients: ' + err.message);
+    alert((l10n.failedLoadPatients || 'Failed to load patients:') + ' ' + err.message);
   }
 }
 
 async function loadPatientForEdit(id) {
+  const l10n = window.MediSphereL10n || {};
+
   try {
     const p = await MediSphereApi.patients.getById(id);
     $('#firstName').val(p.firstName);
@@ -100,7 +108,7 @@ async function loadPatientForEdit(id) {
     }
     $('#isPrivatePatient').prop('checked', p.isPrivatePatient);
   } catch (err) {
-    alert('Failed to load patient: ' + err.message);
+    alert((l10n.failedLoadPatient || 'Failed to load patient:') + ' ' + err.message);
   }
 }
 

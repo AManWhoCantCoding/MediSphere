@@ -1,7 +1,7 @@
 @page
 @model MediSphere.Pages.Reports.UpdateReportModel
 @{
-    ViewData["Title"] = "Update Report";
+    ViewData["Title"] = Localizer["UpdateReport_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
@@ -10,9 +10,9 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="ExistingReportModel.ReportId" />
         <div class="form-group">
-            <label asp-for="ExistingReportModel.PatientId">Patient ID:</label>
+            <label asp-for="ExistingReportModel.PatientId">@Localizer["PatientIdLabel"]</label>
             <select asp-for="ExistingReportModel.PatientId" class="form-control">
-                <option value="">-- Select Patient --</option>
+                <option value="">@Localizer["SelectPatient"]</option>
                 @if (Model.Patients != null)
                 {
                     @foreach (var patient in Model.Patients)
@@ -25,27 +25,23 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="ExistingReportModel.ReportDescription">Report Description:</label>
+            <label asp-for="ExistingReportModel.ReportDescription">@Localizer["ReportDescription"]:</label>
             <input asp-for="ExistingReportModel.ReportDescription" class="form-control" />
         </div>
         <div class="form-group">
-            <label asp-for="ExistingReportModel.InitialStaffName">Initial Staff Name:</label>
+            <label asp-for="ExistingReportModel.InitialStaffName">@Localizer["InitialStaffName"]</label>
             <input asp-for="ExistingReportModel.InitialStaffName" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label asp-for="ExistingReportModel.Status">Status:</label>
+            <label asp-for="ExistingReportModel.Status">@Localizer["Status"]</label>
             <select asp-for="ExistingReportModel.Status" class="form-control">
-                <option value="1 - Created">1 - Created</option>
-                <option value="2 - Checking">2 - Checking</option>
-                <option value="3 - In Progress">3 - In Progress</option>
-                <option value="4 - Completed">4 - Completed</option>
-                <option value="5 - Rejected">5 - Rejected</option>
+                <partial name="_ReportStatusOptionsPartial" />
             </select>
         </div>
 
         <div class="form-group" style="margin-top: 10px;">
-            <button type="submit" class="btn btn-primary">Update Report</button>
+            <button type="submit" class="btn btn-primary">@Localizer["UpdateReportButton"]</button>
         </div>
 
     </form>

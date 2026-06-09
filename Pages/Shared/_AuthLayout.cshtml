@@ -5,7 +5,8 @@
 <div class="ms-auth-page">
     <div class="ms-auth-card">
         <div class="ms-auth-tabs">
-            <a class="ms-auth-tab" asp-page="/Account/Login">Log In</a>
+            <a class="ms-auth-tab" asp-page="/Account/Login">@Localizer["Auth_LogIn"]</a>
+            <a class="ms-auth-tab" asp-page="/Account/Register">@Localizer["Auth_Register"]</a>
         </div>
         <div class="ms-auth-body">
             @RenderBody()

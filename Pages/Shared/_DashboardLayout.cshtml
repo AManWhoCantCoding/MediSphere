@@ -3,11 +3,11 @@
 @inject SignInManager<UserModel> SignInManager
 @inject UserManager<UserModel> UserManager
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MediSphere</title>
+    <title>@ViewData["Title"] - @Localizer["MediSphereBrand"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -20,8 +20,8 @@
     <div class="ms-app">
         <aside class="ms-sidebar">
             <a class="ms-sidebar-brand" asp-page="/Home/Dashboard">
-                <img src="~/resources/logo.png" alt="MediSphere">
-                <span>MediSphere</span>
+                <img src="~/resources/logo.png" alt="@Localizer["MediSphereBrand"]">
+                <span>@Localizer["MediSphereBrand"]</span>
             </a>
             <partial name="_SideMenuPartial" />
         </aside>
@@ -31,14 +31,12 @@
         <div class="ms-main">
             <header class="ms-topbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button type="button" id="sidebarToggle" class="ms-sidebar-toggle" aria-label="Toggle menu">
+                    <button type="button" id="sidebarToggle" class="ms-sidebar-toggle" aria-label="@Localizer["ToggleMenu"]">
                         <i class="bi bi-list"></i>
                     </button>
                     <h1 class="ms-topbar-title">@ViewData["Title"]</h1>
                 </div>
-                <div class="ms-topbar-actions">
-                    <partial name="_LoginPartial" />
-                </div>
+                <partial name="_LoginPartial" />
             </header>
             <main class="ms-content" role="main">
                 @RenderBody()
@@ -47,6 +45,7 @@
     </div>
 
     <partial name="_ValidationScriptsPartial" />
+    <partial name="_JsL10nPartial" />
     <script src="~/js/api-client.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>

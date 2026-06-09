@@ -1,16 +1,16 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = Localizer["Home_Title"].Value;
 }
 
 <div class="ms-hero">
-    <h1>MediSphere — Hospital Management System</h1>
-    <p>A modern hospital management platform built with your clinic's future in mind. Streamline patients, appointments, prescriptions, and reports in one place.</p>
+    <h1>@Localizer["Home_Heading"]</h1>
+    <p>@Localizer["Home_Description"]</p>
     <a asp-page="/Account/Login" class="btn btn-primary btn-lg px-4">
-        <i class="bi bi-box-arrow-in-right me-2"></i>Sign in to get started
+        <i class="bi bi-box-arrow-in-right me-2"></i>@Localizer["Home_SignIn"]
     </a>
     <div class="ms-hero-image mt-5">
-        <img src="~/resources/Doctor.png" alt="Healthcare professionals">
+        <img src="~/resources/Doctor.png" alt="@Localizer["Home_HealthcareAlt"]">
     </div>
 </div>

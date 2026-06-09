@@ -1,0 +1,12 @@
+@using System.Globalization
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+}
+<div class="ms-lang-switcher" role="group" aria-label="@Localizer["Language"]">
+    <a asp-page="/Culture/Set" asp-route-culture="en" asp-route-returnUrl="@returnUrl"
+       class="ms-lang-btn @(currentCulture == "en" ? "active" : "")" title="English">EN</a>
+    <span class="ms-lang-divider" aria-hidden="true">|</span>
+    <a asp-page="/Culture/Set" asp-route-culture="vi" asp-route-returnUrl="@returnUrl"
+       class="ms-lang-btn @(currentCulture == "vi" ? "active" : "")" title="Tiếng Việt">VI</a>
+</div>

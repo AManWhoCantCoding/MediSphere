@@ -1,9 +1,11 @@
 using ClosedXML.Excel;
 using MediSphere.Business.Interfaces;
 using MediSphere.Models;
+using MediSphere.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 
 namespace MediSphere.Pages.Reports
 {
@@ -11,10 +13,12 @@ namespace MediSphere.Pages.Reports
     public class ExportReportModel : PageModel
     {
         private readonly IReportBusiness _reportBusiness;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
-        public ExportReportModel(IReportBusiness reportBusiness)
+        public ExportReportModel(IReportBusiness reportBusiness, IStringLocalizer<SharedResources> localizer)
         {
             _reportBusiness = reportBusiness;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -57,7 +61,7 @@ namespace MediSphere.Pages.Reports
 
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                ModelState.AddModelError("File Error", "Please enter a valid file name!");
+                ModelState.AddModelError("File Error", _localizer["InvalidFileName"]);
                 return Page();
             }
 

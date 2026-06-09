@@ -1,7 +1,7 @@
 @page
 @model MediSphere.Pages.Administrator.UpdateUserModel
 @{
-    ViewData["Title"] = "Update User";
+    ViewData["Title"] = Localizer["UpdateUser_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
@@ -12,89 +12,79 @@
             <input type="hidden" asp-for="ExistingUserModel.Id" />
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.FirstName" class="form-control" aria-required="true" />
-                <label asp-for="ExistingUserModel.FirstName" class="form-label"> First name</label>
+                <label asp-for="ExistingUserModel.FirstName" class="form-label">@Localizer["FirstName"]</label>
                 <span asp-validation-for="ExistingUserModel.FirstName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.MiddleName" class="form-control" aria-required="true" />
-                <label asp-for="ExistingUserModel.MiddleName" class="form-label"> Middle name</label>
+                <label asp-for="ExistingUserModel.MiddleName" class="form-label">@Localizer["MiddleName"]</label>
                 <span asp-validation-for="ExistingUserModel.MiddleName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.LastName" class="form-control" />
-                <label asp-for="ExistingUserModel.LastName" class="form-label">Last Name</label>
+                <label asp-for="ExistingUserModel.LastName" class="form-label">@Localizer["LastName"]</label>
                 <span asp-validation-for="ExistingUserModel.LastName" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
-
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="ExistingUserModel.Email" class="form-label">Email Address</label>
+                <label asp-for="ExistingUserModel.Email" class="form-label">@Localizer["EmailAddress"]</label>
                 <span asp-validation-for="ExistingUserModel.Email" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.PhoneNumber" class="form-control" autocomplete="tel" />
-                <label asp-for="ExistingUserModel.PhoneNumber" class="form-label"> Phone Number</label>
+                <label asp-for="ExistingUserModel.PhoneNumber" class="form-label">@Localizer["PhoneNumber"]</label>
                 <span asp-validation-for="ExistingUserModel.PhoneNumber" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
-
             <div class="form-floating">
                 <select asp-for="ExistingUserModel.Gender" class="form-control">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Non-Binary">Non-Binary</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                    <option value="Custom">Custom</option>
+                    <partial name="_GenderOptionsPartial" />
                 </select>
-                <label asp-for="ExistingUserModel.Gender" class="form-label"> Select gender</label>
+                <label asp-for="ExistingUserModel.Gender" class="form-label">@Localizer["SelectGender"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
             <div class="form-floating">
                 <input asp-for="ExistingUserModel.DateOfBirth" id="dateOfBirth" class="form-control"
                        data-provide="datepicker" data-date-format="mm/dd/yyyy" />
-                <label asp-for="ExistingUserModel.DateOfBirth" class="form-label">Date of Birth</label>
+                <label asp-for="ExistingUserModel.DateOfBirth" class="form-label">@Localizer["DateOfBirth"]</label>
                 <span asp-validation-for="ExistingUserModel.DateOfBirth" class="text-danger"></span>
             </div>
             <div style="margin-bottom: 10px;"></div>
 
 <div class="form-floating">
     <select asp-for="SelectedRole" class="form-control">
-        <option value="">Select a role</option>
+        <option value="">@Localizer["SelectRole"]</option>
         @foreach (var role in Model.AllRoles)
         {
             <option value="@role.Name">@role.Name</option>
         }
     </select>
-    <label asp-for="SelectedRole" class="form-label">Select a role</label>
+    <label asp-for="SelectedRole" class="form-label">@Localizer["SelectRole"]</label>
 </div>
 <div style="margin-bottom: 10px;"></div>
 
-
-
             <div style="margin-bottom: 15px;"></div>
             <div class="form-check">
-                <input asp-for="ExistingUserModel.TwoFactorEnabled" class="form-check-input" type="checkbox" aria-required="true       />
+                <input asp-for="ExistingUserModel.TwoFactorEnabled" class="form-check-input" type="checkbox" />
                 <label asp-for="ExistingUserModel.TwoFactorEnabled" class="form-check-label">
-                    Requires 2FA? (Two factor authentication.)
+                    @Localizer["Requires2FA"] (@Localizer["Requires2FAHint"])
                 </label>
             </div>
             <div style="margin-bottom: 15px;"></div>
             <div class="form-group d-flex align-items-center">
                 <div class="col-7 offset-2 text-center">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Update User</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">@Localizer["UpdateUser_Title"]</button>
                 </div>
-            </div>
-            <div class="form-group">
             </div>
         </form>
     </section>

@@ -1,4 +1,5 @@
 using MediSphere.Models;
+using MediSphere.Resources;
 using MediSphere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -17,15 +19,18 @@ namespace MediSphere.Pages.Account
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
         public RegisterModel(
             UserManager<UserModel> userManager,
             SignInManager<UserModel> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IStringLocalizer<SharedResources> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -47,7 +52,7 @@ namespace MediSphere.Pages.Account
 
             if (!CredentialModel.AcceptedTerms)
             {
-                ModelState.AddModelError(nameof(CredentialModel.AcceptedTerms), "Please accept the terms and conditions.");
+                ModelState.AddModelError(nameof(CredentialModel.AcceptedTerms), _localizer["AcceptTermsRequired"]);
                 return Page();
             }
 

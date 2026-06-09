@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const l10n = window.MediSphereL10n || {};
+
     if ($('#prescriptions-table-body').length) {
         loadPrescriptionsTable();
     }
@@ -20,7 +22,7 @@ $(document).ready(function () {
             await MediSphereApi.prescriptions.create(readPrescriptionForm());
             window.location.href = '/Prescriptions/Index';
         } catch (err) {
-            alert('Failed to add prescription: ' + err.message);
+            alert((l10n.failedAddPrescription || 'Failed to add prescription:') + ' ' + err.message);
         }
     });
 
@@ -30,17 +32,17 @@ $(document).ready(function () {
             await MediSphereApi.prescriptions.update($('#prescriptionId').val(), readPrescriptionForm());
             window.location.href = '/Prescriptions/Index';
         } catch (err) {
-            alert('Failed to update prescription: ' + err.message);
+            alert((l10n.failedUpdatePrescription || 'Failed to update prescription:') + ' ' + err.message);
         }
     });
 
     $('#delete-prescription-btn').on('click', async function () {
-        if (!confirm('Delete this prescription?')) return;
+        if (!confirm(l10n.confirmDeletePrescription || 'Delete this prescription?')) return;
         try {
             await MediSphereApi.prescriptions.delete($('#prescriptionId').val());
             window.location.href = '/Prescriptions/Index';
         } catch (err) {
-            alert('Failed to delete prescription: ' + err.message);
+            alert((l10n.failedDeletePrescription || 'Failed to delete prescription:') + ' ' + err.message);
         }
     });
 });
@@ -64,6 +66,8 @@ async function loadPatientOptions(selectSelector) {
 }
 
 async function loadPrescriptionsTable() {
+    const l10n = window.MediSphereL10n || {};
+
     try {
         const [prescriptions, patients] = await Promise.all([
             MediSphereApi.prescriptions.getAll(),
@@ -78,17 +82,17 @@ async function loadPrescriptionsTable() {
             tbody.append(
                 '<tr>' +
                 '<td>' + rx.prescriptionId + '</td>' +
-                '<td>' + (patientMap[rx.patientId] || 'Unknown') + '</td>' +
+                '<td>' + (patientMap[rx.patientId] || (l10n.unknown || 'Unknown')) + '</td>' +
                 '<td>' + rx.medicationName + '</td>' +
                 '<td>' + rx.dosage + '</td>' +
-                '<td>' + (rx.paymentNeeded ? 'Yes' : 'No') + '</td>' +
+                '<td>' + (rx.paymentNeeded ? (l10n.yes || 'Yes') : (l10n.no || 'No')) + '</td>' +
                 '<td>' + (rx.notes || '') + '</td>' +
                 '<td><a href="/Prescriptions/UpdatePrescription?id=' + rx.prescriptionId + '" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a></td>' +
                 '</tr>'
             );
         });
     } catch (err) {
-        alert('Failed to load prescriptions: ' + err.message);
+        alert((l10n.failedLoadPrescriptions || 'Failed to load prescriptions:') + ' ' + err.message);
     }
 }
 

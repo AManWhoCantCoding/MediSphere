@@ -173,6 +173,41 @@ a:hover { color: var(--ms-primary-dark); }
     gap: 12px;
 }
 
+.ms-lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: var(--ms-bg);
+    border: 1px solid var(--ms-border);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.ms-lang-btn {
+    color: var(--ms-text-muted);
+    text-decoration: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.ms-lang-btn:hover {
+    color: var(--ms-primary);
+    text-decoration: none;
+}
+
+.ms-lang-btn.active {
+    color: var(--ms-primary);
+    background: rgba(var(--ms-primary-rgb, 13, 110, 253), 0.1);
+}
+
+.ms-lang-divider {
+    color: var(--ms-border);
+    user-select: none;
+}
+
 .ms-user-pill {
     display: flex;
     align-items: center;

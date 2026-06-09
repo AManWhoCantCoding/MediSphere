@@ -1,13 +1,13 @@
 @page
 @model MediSphere.Pages.Patient.UpdatePatientModel
 @{
-    ViewData["Title"] = "Edit Patient";
+    ViewData["Title"] = Localizer["UpdatePatient_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="ms-page-header">
-    <h2>Edit Patient</h2>
-    <p>Update patient information.</p>
+    <h2>@Localizer["UpdatePatient_Title"]</h2>
+    <p>@Localizer["UpdatePatient_Subtitle"]</p>
 </div>
 
 <div class="ms-card ms-form-card">
@@ -15,47 +15,43 @@
             <input type="hidden" id="patientId" value="@Model.PatientId" />
             <div class="form-floating">
                 <input id="firstName" class="form-control" required />
-                <label class="form-label">First name</label>
+                <label class="form-label">@Localizer["FirstName"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
             <div class="form-floating">
                 <input id="lastName" class="form-control" required />
-                <label class="form-label">Last name</label>
+                <label class="form-label">@Localizer["LastName"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
             <div class="form-floating">
                 <input id="emailAddress" class="form-control" type="email" />
-                <label class="form-label">Email Address</label>
+                <label class="form-label">@Localizer["EmailAddress"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
             <div class="form-floating">
                 <input id="contactNumber" class="form-control" />
-                <label class="form-label">Phone Number</label>
+                <label class="form-label">@Localizer["PhoneNumber"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
             <div class="form-floating">
                 <select id="gender" class="form-control">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Non-Binary">Non-Binary</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                    <option value="Custom">Custom</option>
+                    <partial name="_GenderOptionsPartial" />
                 </select>
-                <label class="form-label">Select gender</label>
+                <label class="form-label">@Localizer["SelectGender"]</label>
             </div>
             <div style="margin-bottom: 10px;"></div>
             <div class="form-floating">
                 <input id="dateOfBirth" type="date" class="form-control" />
-                <label class="form-label">Date of Birth</label>
+                <label class="form-label">@Localizer["DateOfBirth"]</label>
             </div>
             <div style="margin-bottom: 15px;"></div>
             <div class="form-check">
                 <input id="isPrivatePatient" class="form-check-input" type="checkbox" />
-                <label class="form-check-label">Is not using state healthcare options?</label>
+                <label class="form-check-label">@Localizer["IsPrivatePatient"]</label>
             </div>
             <div style="margin-bottom: 15px;"></div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Update Patient</button>
+                <button type="submit" class="btn btn-primary btn-lg">@Localizer["UpdatePatient_Button"]</button>
             </div>
     </form>
 </div>

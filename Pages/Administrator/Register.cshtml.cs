@@ -1,4 +1,5 @@
 using MediSphere.Models;
+using MediSphere.Resources;
 using MediSphere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -17,12 +19,18 @@ namespace MediSphere.Pages.Administrator
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
-        public RegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailSender emailSender)
+        public RegisterModel(
+            UserManager<UserModel> userManager,
+            SignInManager<UserModel> signInManager,
+            IEmailSender emailSender,
+            IStringLocalizer<SharedResources> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -57,7 +65,7 @@ namespace MediSphere.Pages.Administrator
 
                 if (!user.AcceptedTerms)
                 {
-                    ModelState.AddModelError("ValidationError", "Please accept the terms and conditions");
+                    ModelState.AddModelError("ValidationError", _localizer["AcceptTermsRequired"]);
                     return Page();
                 }
                 var result = await _userManager.CreateAsync(user, PWordModel.Password);

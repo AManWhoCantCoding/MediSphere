@@ -1,13 +1,13 @@
 @page
 @model MediSphere.Pages.Reports.ExportReportModel
 @{
-    ViewData["Title"] = "Export Report";
+    ViewData["Title"] = Localizer["ExportReport_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>Please enter the file name to use for exporting :)</p>
+<p>@Localizer["ExportReport_Subtitle"]</p>
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -17,13 +17,13 @@
             <form method="post">
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label for="fileName">File Name:</label>
+                    <label for="fileName">@Localizer["FileName"]</label>
                     <input type="text" id="fileName" name="fileName" class="form-control" />
                     <span asp-validation-for="fileName" class="text-danger"></span>
                 </div>
                 <div style="margin-bottom: 15px;"></div>
 
-                <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary">Export to Excel</button>
+                <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary">@Localizer["ExportToExcel"]</button>
             </form>
 
         </div>

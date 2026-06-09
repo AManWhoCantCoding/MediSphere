@@ -1,16 +1,15 @@
 @page
 @model MediSphere.Pages.Administrator.DeleteUserModel
 @{
-    ViewData["Title"] = "Delete User";
+    ViewData["Title"] = Localizer["DeleteUser"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
-
 }
-<h1>Delete User</h1>
+<h1>@Localizer["DeleteUser"]</h1>
 
-<p>Are you sure you want to delete the user?</p>
+<p>@Localizer["DeleteUserConfirm"]</p>
 
 <form method="post">
     <input type="hidden" asp-for="ExistingUserModel.Id" />
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-page="/Patient/Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+    <a asp-page="/Administrator/Settings" class="btn btn-secondary">@Localizer["Cancel"]</a>
 </form>

@@ -1,8 +1,10 @@
 using MediSphere.Business.Interfaces;
 using MediSphere.Models;
+using MediSphere.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 
 namespace MediSphere.Pages.Reports
 {
@@ -10,13 +12,15 @@ namespace MediSphere.Pages.Reports
     public class ReportGeneratorModel : PageModel
     {
         private readonly IReportBusiness _reportBusiness;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
         public IEnumerable<PatientModel> Patients { get; set; } = Enumerable.Empty<PatientModel>();
         public IEnumerable<ReportTypeModel> ReportTypes { get; set; } = Enumerable.Empty<ReportTypeModel>();
 
-        public ReportGeneratorModel(IReportBusiness reportBusiness)
+        public ReportGeneratorModel(IReportBusiness reportBusiness, IStringLocalizer<SharedResources> localizer)
         {
             _reportBusiness = reportBusiness;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -71,7 +75,7 @@ namespace MediSphere.Pages.Reports
             var result = await _reportBusiness.CreateReportAsync(report);
             if (!result.Success)
             {
-                ModelState.AddModelError(string.Empty, result.ErrorMessage ?? "Could not create report.");
+                ModelState.AddModelError(string.Empty, result.ErrorMessage ?? _localizer["CouldNotCreateReport"]);
                 await LoadFormDataAsync();
                 return Page();
             }
@@ -83,7 +87,7 @@ namespace MediSphere.Pages.Reports
         {
             if (string.IsNullOrWhiteSpace(ReportTypeName))
             {
-                ModelState.AddModelError(string.Empty, "Please enter a report type name before saving as template.");
+                ModelState.AddModelError(string.Empty, _localizer["EnterReportTypeName"]);
                 await LoadFormDataAsync();
                 return Page();
             }
@@ -91,7 +95,7 @@ namespace MediSphere.Pages.Reports
             var reportTypes = await _reportBusiness.GetReportTypesAsync();
             if (reportTypes.Any(t => string.Equals(t.TemplateType, ReportTypeName.Trim(), StringComparison.OrdinalIgnoreCase)))
             {
-                ModelState.AddModelError(string.Empty, "This report type template already exists.");
+                ModelState.AddModelError(string.Empty, _localizer["ReportTypeExists"]);
                 await LoadFormDataAsync();
                 return Page();
             }
@@ -105,7 +109,7 @@ namespace MediSphere.Pages.Reports
             var result = await _reportBusiness.CreateReportTypeAsync(reporttype);
             if (!result.Success)
             {
-                ModelState.AddModelError(string.Empty, result.ErrorMessage ?? "Could not create report type.");
+                ModelState.AddModelError(string.Empty, result.ErrorMessage ?? _localizer["CouldNotCreateReportType"]);
                 await LoadFormDataAsync();
                 return Page();
             }

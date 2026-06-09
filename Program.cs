@@ -1,11 +1,14 @@
+using System.Globalization;
 using System.Text;
 using MediSphere;
 using MediSphere.DAL;
+using MediSphere.DependencyInjection;
 using MediSphere.Middleware;
 using MediSphere.Models;
-using MediSphere.DependencyInjection;
+using MediSphere.Resources;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -94,8 +97,25 @@ try
 
     builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
+    builder.Services.AddLocalization();
+
+    builder.Services.Configure<RequestLocalizationOptions>(options =>
+    {
+        var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("vi") };
+        options.DefaultRequestCulture = new RequestCulture("en");
+        options.SupportedCultures = supportedCultures;
+        options.SupportedUICultures = supportedCultures;
+        options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+    });
+
     builder.Services.AddControllers();
-    builder.Services.AddRazorPages();
+    builder.Services.AddRazorPages()
+        .AddViewLocalization()
+        .AddDataAnnotationsLocalization(options =>
+        {
+            options.DataAnnotationLocalizerProvider = (_, factory) =>
+                factory.Create(typeof(SharedResources));
+        });
     builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
     builder.Services.AddHealthChecks()
@@ -153,6 +173,10 @@ try
     app.UseSerilogRequestLogging();
     app.UseMiddleware<RequestLoggingMiddleware>();
     app.UseRouting();
+
+    var localizationOptions = app.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value;
+    app.UseRequestLocalization(localizationOptions);
+
     app.UseAuthentication();
     app.UseAuthorization();
 

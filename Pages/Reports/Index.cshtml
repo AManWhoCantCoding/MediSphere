@@ -1,39 +1,39 @@
 @page
 @model MediSphere.Pages.Reports.ReportsModel
 @{
-    ViewData["Title"] = "Reports";
+    ViewData["Title"] = Localizer["Reports_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="ms-page-header">
-    <h2>Reports</h2>
-    <p>Search and manage medical reports.</p>
+    <h2>@Localizer["Reports_Title"]</h2>
+    <p>@Localizer["Reports_Subtitle"]</p>
 </div>
 
 <div class="ms-card">
     <form class="ms-search" onsubmit="return false;">
-        <input id="searchBox" class="form-control" type="search" placeholder="Search reports...">
+        <input id="searchBox" class="form-control" type="search" placeholder="@Localizer["Reports_SearchPlaceholder"]">
         <button class="btn btn-primary" type="button"><i class="bi bi-search"></i></button>
     </form>
     <div class="ms-table-wrap">
         <table class="table ms-table">
             <thead>
                 <tr>
-                    <th>Report ID</th>
-                    <th>Patient ID</th>
-                    <th>Created On</th>
-                    <th>Report Description</th>
-                    <th>Report Type</th>
-                    <th>Has Report Been Printed?</th>
-                    <th>Report Status</th>
-                    <th>Report Started By Staff member</th>
-                    <th>Last Updated</th>
-                    <th>Last Updated By</th>
-                    <th>Actions</th>
+                    <th>@Localizer["ReportId"]</th>
+                    <th>@Localizer["PatientId"]</th>
+                    <th>@Localizer["CreatedOn"]</th>
+                    <th>@Localizer["ReportDescription"]</th>
+                    <th>@Localizer["ReportType"]</th>
+                    <th>@Localizer["HasBeenPrinted"]</th>
+                    <th>@Localizer["ReportStatus"]</th>
+                    <th>@Localizer["ReportStartedBy"]</th>
+                    <th>@Localizer["LastUpdated"]</th>
+                    <th>@Localizer["LastUpdatedBy"]</th>
+                    <th>@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody id="reports-table-body">
-                <tr><td colspan="11" class="text-center text-muted py-4">Loading reports via API...</td></tr>
+                <tr><td colspan="11" class="text-center text-muted py-4">@Localizer["LoadingReports"]</td></tr>
             </tbody>
         </table>
     </div>

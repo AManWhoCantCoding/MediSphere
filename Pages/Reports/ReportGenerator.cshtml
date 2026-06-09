@@ -1,7 +1,7 @@
 @page
 @model MediSphere.Pages.Reports.ReportGeneratorModel
 @{
-    ViewData["Title"] = "Generate Report";
+    ViewData["Title"] = Localizer["GenerateReport_Title"].Value;
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
 }
 
@@ -11,8 +11,8 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <form method="post">
         <div class="form-group">
-            <label asp-for="ReportTypeName">Report Type:</label>
-            <input asp-for="ReportTypeName" class="form-control" list="reportTypeTemplates" id="reportTypeInput" placeholder="Enter or select a report type" />
+            <label asp-for="ReportTypeName">@Localizer["ReportTypeLabel"]</label>
+            <input asp-for="ReportTypeName" class="form-control" list="reportTypeTemplates" id="reportTypeInput" placeholder="@Localizer["ReportTypePlaceholder"]" />
             <datalist id="reportTypeTemplates">
                 @if (Model.ReportTypes != null)
                 {
@@ -23,13 +23,13 @@
                 }
             </datalist>
             <input type="hidden" asp-for="SelectedTemplateTypeId" id="selectedTemplateTypeId" />
-            <small class="form-text text-muted">Type a new report type or pick a saved template. Use "Save As Template" to reuse a type later.</small>
+            <small class="form-text text-muted">@Localizer["ReportTypeHint"]</small>
         </div>
 
         <div class="form-group">
-            <label asp-for="NewReportModel.PatientId">Patient ID:</label>
+            <label asp-for="NewReportModel.PatientId">@Localizer["PatientIdLabel"]</label>
             <select asp-for="NewReportModel.PatientId" class="form-control">
-                <option value="">-- Select Patient --</option>
+                <option value="">@Localizer["SelectPatient"]</option>
                 @if (Model.Patients != null)
                 {
                     @foreach (var patient in Model.Patients)
@@ -42,28 +42,24 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="NewReportModel.ReportDescription">Report Description:</label>
+            <label asp-for="NewReportModel.ReportDescription">@Localizer["ReportDescription"]:</label>
             <input asp-for="NewReportModel.ReportDescription" class="form-control" />
         </div>
         <div class="form-group">
-            <label asp-for="NewReportModel.InitialStaffName">Initial Staff Name:</label>
+            <label asp-for="NewReportModel.InitialStaffName">@Localizer["InitialStaffName"]</label>
             <input asp-for="NewReportModel.InitialStaffName" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label asp-for="NewReportModel.Status">Status:</label>
+            <label asp-for="NewReportModel.Status">@Localizer["Status"]</label>
             <select asp-for="NewReportModel.Status" class="form-control">
-                <option value="1 - Created">1 - Created</option>
-                <option value="2 - Checking">2 - Checking</option>
-                <option value="3 - In Progress">3 - In Progress</option>
-                <option value="4 - Completed">4 - Completed</option>
-                <option value="5 - Rejected">5 - Rejected</option>
+                <partial name="_ReportStatusOptionsPartial" />
             </select>
         </div>
 
         <div class="form-group" style="margin-top: 10px;">
-            <button type="submit" asp-page-handler="CreateReport" class="btn btn-primary">Generate Report</button>
-            <button type="submit" asp-page-handler="CreateTemplateType" class="btn btn-secondary">Save As Template</button>
+            <button type="submit" asp-page-handler="CreateReport" class="btn btn-primary">@Localizer["GenerateReportButton"]</button>
+            <button type="submit" asp-page-handler="CreateTemplateType" class="btn btn-secondary">@Localizer["SaveAsTemplate"]</button>
         </div>
 
     </form>

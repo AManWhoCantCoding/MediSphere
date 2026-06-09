@@ -3,11 +3,11 @@
 @inject SignInManager<UserModel> SignInManager
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MediSphere</title>
+    <title>@ViewData["Title"] - @Localizer["MediSphereBrand"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/siteTheme.css" asp-append-version="true" />
@@ -17,8 +17,8 @@
 <body>
     <nav class="ms-public-nav">
         <a class="ms-public-brand" asp-page="/Index">
-            <img src="~/resources/logo.png" alt="MediSphere">
-            MediSphere
+            <img src="~/resources/logo.png" alt="@Localizer["MediSphereBrand"]">
+            @Localizer["MediSphereBrand"]
         </a>
         <partial name="_LoginPartial" />
     </nav>
@@ -28,11 +28,12 @@
     </main>
 
     <footer class="ms-public-footer">
-        &copy; @DateTime.Now.Year MediSphere — Hospital Management System
+        @string.Format(Localizer["FooterCopyright"].Value, DateTime.Now.Year)
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <partial name="_ValidationScriptsPartial" />
+    <partial name="_JsL10nPartial" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
