@@ -3,7 +3,7 @@
 
 <br />
 <div align="center">
-  <img src="wwwroot/resources/logo-two.svg" alt="MediSphere Logo">
+  <img src="wwwroot/resources/Logo.png" alt="MediSphere Logo">
 </div>
 
 MediSphere is a Hospital Management System — a modern web application for hospital administration, patient care workflows, and staff management. Previously developed as **DocDocGo**, the project has been rebranded and fully redesigned with a clean, professional UI.
