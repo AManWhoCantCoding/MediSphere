@@ -25,7 +25,6 @@ MediSphere is a Hospital Management System — a modern web application for hosp
     <li><a href="#running-tests">Running Tests</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#sa-requirements-evaluation">SA Requirements Evaluation</a></li>
-    <li><a href="#license">License</a></li>
   </ol>
 </details>
 
